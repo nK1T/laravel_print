@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,13 +20,20 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/',function(){
     return redirect('login');
 });
-Route::get('index',function(){
-    return redirect('index');
-});
+// Route::get('index',function(){
+//     return redirect('index');
+// });
 // Route::get('/',function(){
 //     return redirect('index');
 // });
-Route::resource('crud','CrudsController');
+Route::resource('crud','App\Http\Controllers\CrudsController');
+
+//DOMPDF Routes
+Route::get('/show', [PdfController::class, 'showData']);
+Route::get('/pdf', [PdfController::class, 'createPDF']);
+Route::get('/csv', [PdfController::class, 'createCSV']);
+
+// Route::resource('pdf', 'App\Http\Controllers\PdfController');
 
 // Authentication Routes
 Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
@@ -59,3 +67,7 @@ Route::get('/home', function(){
     
     return view('create');
 })->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

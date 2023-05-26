@@ -1,5 +1,20 @@
 <link rel="stylesheet" href="/resources/css/app.css">
+<script type="text/php">
+    if (isset($pdf)) {
+        $x = 250;
+        $y = 10;
+        $text = "Page {PAGE_NUM} of {PAGE_COUNT}";
+        $font = null;
+        $size = 14;
+        $color = array(255,0,0);
+        $word_space = 0.0;  //  default
+        $char_space = 0.0;  //  default
+        $angle = 0.0;   //  default
+        $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+    }
+</script>
 <style>
+    
   *{
     font-family:Arial, Helvetica, sans-serif
   }
@@ -7,9 +22,17 @@
     text-align: center;
   }
 
-  p{
+  #header{
     line-height: 1.1;
     font-weight:600;
+  }
+  #footer{
+    justify-content: end;
+    /* display: flex-end; */
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: small;
+    line-height: 0.1;
+    font-weight:lighter;
   }
   .butto {
  appearance: none;
@@ -22,7 +45,7 @@
  display: inline-block;
  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
  font-size: 10px;
- font-weight: bold;
+ font-weight: 600;
  line-height: normal;
  margin: 0;
  min-height: 1.3em;
@@ -92,49 +115,35 @@
     }
     th:nth-child(9),
     td:nth-child(9) {
-        width: 7%; /* Set the width of the second column to 30% */
+        width: 17%; /* Set the width of the second column to 30% */
     }
     th:nth-child(10),
     td:nth-child(10) {
         width: 15%; /* Set the width of the second column to 30% */
     }
-    th:nth-child(11),
-    td:nth-child(11) {
-        width: 15%; /* Set the width of the second column to 30% */
-    }
-    th:nth-child(12),
-    td:nth-child(12) {
-        width: 2%; /* Set the width of the second column to 30% */
-    }
-    th:nth-child(13),
-    td:nth-child(13) {
-        width: 2%; /* Set the width of the second column to 30% */
-    }
 
     /* Define the styles for other columns as needed */
 </style>
 <body>
-<header>
-  <img src="{{URL::asset('assets/msell.png')}}" alt="Logo">
-  <p>Manacle Technologies Pvt. Ltd.<br>243/10, Second Floor, Amritpuri-B,<br> East of Kailash, New Delhi-110065</p>
-</header>
-<thead><br>
-<form style="text-align:end" action="{{route('crud.create')}}" method="GET">   
-                <button class = "butto" type="submit">Add more</button>  
-</form>
-<table border="1px" style="margin:auto;">  
-  <tr>  
-    <td style="font-weight: 600;">ID</td>  
-    <td style="font-weight: 600;">First Name</td>  
-    <td style="font-weight: 600;">Last Name</td>  
-    <td style="font-weight: 600;">Gender</td>  
-    <td style="font-weight: 600;">Age</td>  
-    <td style="font-weight: 600;">YOB</td>  
-    <td style="font-weight: 600;">Father Name</td>  
-    <td style="font-weight: 600;">Roll No</td>    
-    <td style="font-weight: 600;">City</td>  
-    <td style="font-weight: 600;">State</td>  
-    <td style="font-weight: 600;" colspan="2">Operations</td> 
+    <table border="1px solid black" cellspacing ="0" style="margin:auto;">  
+        <thead> 
+                <th colspan="10">
+                    <header>
+                      {{--<img src="{{URL::asset('assets/msell.png')}}" alt="Logo">--}}
+                      <p id="header" >Manacle Technologies Pvt. Ltd.<br>243/10, Second Floor, Amritpuri-B,<br> East of Kailash, New Delhi-110065</p>
+                    </header>
+                </th>
+            <tr>  
+    <th style="font-weight: 600;">ID</th>  
+    <th style="font-weight: 600;">First Name</th>  
+    <th style="font-weight: 600;">Last Name</th>  
+    <th style="font-weight: 600;">Gender</th>  
+    <th style="font-weight: 600;">Age</th>  
+    <th style="font-weight: 600;">YOB</th>  
+    <th style="font-weight: 600;">Father Name</th>  
+    <th style="font-weight: 600;">State</th>  
+    <th style="font-weight: 600;">Roll No</th>    
+    <th style="font-weight: 600;">City</th>  
   </tr>  
 </thead>  
 <tbody>  
@@ -150,23 +159,14 @@
           <td>{{$crud->roll_no}}</td>  
           <td>{{$crud->city}}</td>  
           <td>{{$crud->state}}</td>  
-          <td >  
-            <form action="{{ route('crud.destroy', $crud->id)}}" method="post">
-              @method('DELETE')  
-              @csrf
-                <button class ="btn" type="submit">Delete</button>  
-              </form>  
-            </td>  
-            <td >  
-              <form action="{{ route('crud.edit', $crud->id)}}" method="GET">   
-                <button class = "btn" type="submit">Edit</button>  
-              </form>  
-            </td>  
           </tr>  
           @endforeach
         </tbody>  
-      </table>  <br>
-      <a class="butto"href= "{{ URL::to('/pdf') }}">PDF</a>
-      <a class="butto"href= "{{ URL::to('/csv') }}">CSV</a>
+        <tfoot>
+            <th colspan="10">
+                <p id="footer"> All copyrights &#169; reserved by Ankit Giri.</p>
+            </th>
+        </tfoot>
+      </table>  
 </body>
 

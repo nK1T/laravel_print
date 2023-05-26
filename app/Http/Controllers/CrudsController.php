@@ -42,17 +42,27 @@ class CrudsController extends Controller
             'first_name'=>'required',  
             'last_name'=>'required',  
             'gender'=>'required',  
-            'qualifications'=>'required'  
+            'age'=>'required',  
+            'yob'=>'required',  
+            'father_name'=>'required',  
+            'roll_no'=>'required',
+            'city'=>'required',
+            'state'=>'required'  
         ]);  
   
         $crud = new Crud;  
         $crud->first_name =  ($request->first_name);  
         $crud->last_name = ($request->last_name);  
-        $crud->qualifications = ($request->qualifications);  
         $crud->gender = ($request->gender);  
+        $crud->age = ($request->age);  
+        $crud->yob = ($request->yob);  
+        $crud->father_name = ($request->father_name);  
+        $crud->roll_no = ($request->roll_no);  
+        $crud->city = ($request->city);  
+        $crud->state = ($request->state);  
         $crud->save();  
 
-        return redirect('index');
+        return redirect('crud');
     }   
     
     /** 
@@ -95,16 +105,25 @@ class CrudsController extends Controller
             'first_name'=>'required',  
             'last_name'=>'required',  
             'gender'=>'required',  
-            'qualifications'=>'required'  
+            'age'=>'required',  
+            'yob'=>'required',  
+            'father_name'=>'required',  
+            'roll_no'=>'required',  
+            'city'=>'required',
+            'state'=>'required'  
         ]);  
         
         $crud = Crud::find($id);  
-        $crud->first_name =  $request->first_name;  
-        $crud->last_name = $request->last_name;  
-        $crud->qualifications = $request->qualifications;  
-        $crud->gender = $request->gender;  
-        
-        $crud->save();  
+        $crud->first_name =  ($request->first_name);  
+        $crud->last_name = ($request->last_name);  
+        $crud->gender = ($request->gender);  
+        $crud->age = ($request->age);  
+        $crud->yob = ($request->yob);  
+        $crud->father_name = ($request->father_name);  
+        $crud->roll_no = ($request->roll_no);  
+        $crud->city = ($request->city);  
+        $crud->state = ($request->state);  
+        $crud->save(); 
         return redirect('crud');
     }    
   
