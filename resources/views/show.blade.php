@@ -32,7 +32,7 @@
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-size: small;
     line-height: 0.1;
-    font-weight:lighter;
+    /* font-weight:lighter; */
   }
   .butto {
  appearance: none;
